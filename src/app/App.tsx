@@ -32,7 +32,7 @@ const TIMELINE = [
 
 const PORTFOLIO_ITEMS = [
   { id: 1, title: "ResumeCraft", category: "Design", tag: "UI", img: "/resumecraft.png", height: 200, link: "https://www.figma.com/proto/pTIN8uDQBOBooW3WHrsC6X/My-Resume-Portofolio?node-id=314-445&t=rP10JuV0Zpns6xYO-1" },
-  { id: 2, title: "Pre-Order Ecommerce Management System", category: "Front-End Developer", tag: "Website", img: "photo-1551288049-bebda4e38f71", height: 260, link: "https://github.com" },
+  { id: 2, title: "Pre-Order Ecommerce Management System", category: "Front-End Developer", tag: "Website", img: "photo-1551288049-bebda4e38f71", height: 260, link: "https://github.com/nunkalfath/pre-order-ecommerce" },
   { id: 3, title: "Ganin Homestead", category: "Landing Page", tag: "Landing Page", img: "photo-1503389152951-9c3d8b6d9538", height: 220, link: "https://github.com" },
   { id: 4, title: "Physics Learning App", category: "Mobile App", tag: "Mobile App", img: "photo-1635070041078-e363dbe005cb", height: 280, link: "https://github.com" },
   { id: 5, title: "Portfolio Website", category: "Website Design", tag: "Website", img: "photo-1499750310107-5fef28a66643", height: 230, link: "https://github.com" },
