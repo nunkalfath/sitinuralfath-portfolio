@@ -18,6 +18,7 @@ const NAV_ITEMS = [
   { id: "garden", label: "Garden" },
   { id: "contact", label: "Contact" },
 ];
+//cek git
 
 const TIMELINE = [
   { year: "2008–2013", Icon: GraduationCap, title: "Physics Education Student", sub: "Universitas Negeri Semarang", desc: "Fell in love with physics, mathematics, and the beauty of how the universe works. Graduated with a deep passion for teaching.", color: "#8EC5FC" },
