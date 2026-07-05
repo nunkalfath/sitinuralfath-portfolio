@@ -18,7 +18,6 @@ const NAV_ITEMS = [
   { id: "garden", label: "Garden" },
   { id: "contact", label: "Contact" },
 ];
-//cek git
 
 const TIMELINE = [
   { year: "2008–2013", Icon: GraduationCap, title: "Physics Education Student", sub: "Universitas Negeri Semarang", desc: "Fell in love with physics, mathematics, and the beauty of how the universe works. Graduated with a deep passion for teaching.", color: "#8EC5FC" },
@@ -27,12 +26,12 @@ const TIMELINE = [
   { year: "2018", Icon: Heart, title: "Got Married", sub: "A new chapter begins ❤️", desc: "Married my best friend and started building a cozy, meaningful life together from a small home in Indonesia.", color: "#FFB3C1" },
   { year: "2019-2022", Icon: Home, title: "Learning New Skill from Home", sub: "Rediscovering passion", desc: "Enrolled in UI/UX and front-end courses. Built my first React project and discovered a new dimension of creativity.", color: "#A9D18E" },
   { year: "2022", Icon: Users, title: "Become a Mother", sub: "The most importance role", desc: "Welcomed our first child and chose to dedicate fully to family — learning patience, creativity, and unconditional love.", color: "#C5E2B2" },
-  { year: "2024-2025", Icon: Cpu, title: "Return to Technology", sub: "Growing from home", desc: "Started data entry freelancing, gardening, explored the homestead lifestyle, and continued tutoring while managing a beautiful home life.", color: "#8EC5FC" },
+  { year: "2024-2025", Icon: Cpu, title: "Return to Technology", sub: "Growing from home", desc: "Started data entry freelancing, gardening, explored the homestead lifestyle, and creating content for social media.", color: "#8EC5FC" },
   { year: "2026–Present", Icon: Star, title: "Building Digital Products", sub: "Creating & Sharing", desc: "Designing interfaces, writing code, teaching physics online, and building this digital home — one day at a time.", color: "#A47C5B" },
 ];
 
 const PORTFOLIO_ITEMS = [
-  { id: 1, title: "ResumeCraft", category: "Web Design", tag: "UI", img: "/resumecraft.png", height: 200, link: "https://www.figma.com/proto/pTIN8uDQBOBooW3WHrsC6X/My-Resume-Portofolio?node-id=314-445&t=rP10JuV0Zpns6xYO-1" },
+  { id: 1, title: "ResumeCraft", category: "Design", tag: "UI", img: "/resumecraft.png", height: 200, link: "https://www.figma.com/proto/pTIN8uDQBOBooW3WHrsC6X/My-Resume-Portofolio?node-id=314-445&t=rP10JuV0Zpns6xYO-1" },
   { id: 2, title: "Pre-Order Ecommerce Management System", category: "Front-End Developer", tag: "Website", img: "photo-1551288049-bebda4e38f71", height: 260, link: "https://github.com" },
   { id: 3, title: "Ganin Homestead", category: "Landing Page", tag: "Landing Page", img: "photo-1503389152951-9c3d8b6d9538", height: 220, link: "https://github.com" },
   { id: 4, title: "Physics Learning App", category: "Mobile App", tag: "Mobile App", img: "photo-1635070041078-e363dbe005cb", height: 280, link: "https://github.com" },
