@@ -20,24 +20,25 @@ const NAV_ITEMS = [
 ];
 
 const TIMELINE = [
-  { year: "2014–2018", Icon: GraduationCap, title: "Physics Student", sub: "Universitas Negeri Padang", desc: "Fell in love with physics, mathematics, and the beauty of how the universe works. Graduated with a deep passion for teaching.", color: "#8EC5FC" },
-  { year: "2018–2020", Icon: Briefcase, title: "Private Physics Tutor", sub: "Home & Online", desc: "Helped Grade 10–12 students understand complex physics through storytelling, visual methods, and patient explanation.", color: "#F7D6E0" },
-  { year: "2019", Icon: Heart, title: "Got Married", sub: "A new chapter begins ❤️", desc: "Married my best friend and started building a cozy, meaningful life together from a small home in Indonesia.", color: "#FFB3C1" },
-  { year: "2020", Icon: Users, title: "Became a Mother", sub: "The most important role", desc: "Welcomed our first child and chose to dedicate fully to family — learning patience, creativity, and unconditional love.", color: "#A9D18E" },
-  { year: "2021–2022", Icon: Home, title: "Homemaker & Home Educator", sub: "Growing from home", desc: "Started gardening, explored the homestead lifestyle, and continued tutoring while managing a beautiful home life.", color: "#C5E2B2" },
-  { year: "2023", Icon: Cpu, title: "Return to Technology", sub: "Rediscovering passion", desc: "Enrolled in UI/UX and front-end courses. Built my first React project and discovered a new dimension of creativity.", color: "#8EC5FC" },
-  { year: "2024–Now", Icon: Star, title: "Building Digital Products", sub: "Creating & Sharing", desc: "Designing interfaces, writing code, teaching physics online, and building this digital home — one day at a time.", color: "#A47C5B" },
+  { year: "2008–2013", Icon: GraduationCap, title: "Physics Education Student", sub: "Universitas Negeri Semarang", desc: "Fell in love with physics, mathematics, and the beauty of how the universe works. Graduated with a deep passion for teaching.", color: "#8EC5FC" },
+  { year: "2013–2015", Icon: Briefcase, title: "Physics Teacher", sub: "Vocational High School", desc: "Helped Grade 10–12 students understand complex physics through storytelling, visual methods, and patient explanation.", color: "#F7D6E0" },
+  { year: "2016–2018", Icon: GraduationCap, title: "Master Physics Student", sub: "Universitas Gadjah Mada", desc: "Fell in love with material physics, research, and the traveling to other countries. Graduated with a deep passion for physics.", color: "#8EC5FC" },
+  { year: "2018", Icon: Heart, title: "Got Married", sub: "A new chapter begins ❤️", desc: "Married my best friend and started building a cozy, meaningful life together from a small home in Indonesia.", color: "#FFB3C1" },
+  { year: "2019-2022", Icon: Home, title: "Learning New Skill from Home", sub: "Rediscovering passion", desc: "Enrolled in UI/UX and front-end courses. Built my first React project and discovered a new dimension of creativity.", color: "#A9D18E" },
+  { year: "2022", Icon: Users, title: "Become a Mother", sub: "The most importance role", desc: "Welcomed our first child and chose to dedicate fully to family — learning patience, creativity, and unconditional love.", color: "#C5E2B2" },
+  { year: "2024-2025", Icon: Cpu, title: "Return to Technology", sub: "Growing from home", desc: "Started data entry freelancing, gardening, explored the homestead lifestyle, and continued tutoring while managing a beautiful home life.", color: "#8EC5FC" },
+  { year: "2026–Present", Icon: Star, title: "Building Digital Products", sub: "Creating & Sharing", desc: "Designing interfaces, writing code, teaching physics online, and building this digital home — one day at a time.", color: "#A47C5B" },
 ];
 
 const PORTFOLIO_ITEMS = [
-  { id: 1, title: "ResumeCraft", category: "Web Design", tag: "Case Study", img: "photo-1586717791821-3f44a563fa4c", height: 200 },
-  { id: 2, title: "Mozaik Birumuda", category: "Dashboard", tag: "Dashboard", img: "photo-1551288049-bebda4e38f71", height: 260 },
-  { id: 3, title: "Ganin Homestead", category: "Landing Page", tag: "Landing Page", img: "photo-1503389152951-9c3d8b6d9538", height: 220 },
-  { id: 4, title: "Physics Learning App", category: "Mobile App", tag: "Mobile App", img: "photo-1635070041078-e363dbe005cb", height: 280 },
-  { id: 5, title: "Portfolio Website", category: "Website Design", tag: "Website", img: "photo-1499750310107-5fef28a66643", height: 230 },
-  { id: 6, title: "Blogger Theme", category: "Blogger Theme", tag: "Theme", img: "photo-1542435503-ec7b0b197446", height: 250 },
-  { id: 7, title: "Physics UI Kit", category: "UI Kit", tag: "UI Kit", img: "photo-1518770660439-4636190af475", height: 200 },
-  { id: 8, title: "Social Media Kit", category: "Graphic Design", tag: "Design", img: "photo-1561070791-2526d30994b5", height: 260 },
+  { id: 1, title: "ResumeCraft", category: "Web Design", tag: "UI", img: "/resumecraft.png", height: 200, link: "https://www.figma.com/proto/pTIN8uDQBOBooW3WHrsC6X/My-Resume-Portofolio?node-id=314-445&t=rP10JuV0Zpns6xYO-1" },
+  { id: 2, title: "Pre-Order Ecommerce Management System", category: "Front-End Developer", tag: "Website", img: "photo-1551288049-bebda4e38f71", height: 260, link: "https://github.com" },
+  { id: 3, title: "Ganin Homestead", category: "Landing Page", tag: "Landing Page", img: "photo-1503389152951-9c3d8b6d9538", height: 220, link: "https://github.com" },
+  { id: 4, title: "Physics Learning App", category: "Mobile App", tag: "Mobile App", img: "photo-1635070041078-e363dbe005cb", height: 280, link: "https://github.com" },
+  { id: 5, title: "Portfolio Website", category: "Website Design", tag: "Website", img: "photo-1499750310107-5fef28a66643", height: 230, link: "https://github.com" },
+  { id: 6, title: "Blogger Theme", category: "Blogger Theme", tag: "Theme", img: "photo-1542435503-ec7b0b197446", height: 250, link: "https://github.com" },
+  { id: 7, title: "Physics UI Kit", category: "UI Kit", tag: "UI Kit", img: "photo-1518770660439-4636190af475", height: 200, link: "https://github.com" },
+  { id: 8, title: "Social Media Kit", category: "Graphic Design", tag: "Design", img: "photo-1561070791-2526d30994b5", height: 260, link: "https://github.com" },
 ];
 
 type PhysicsTopic = { title: string; icon: string; lessons: number; duration: string; topics: string[] };
@@ -789,11 +790,14 @@ function Portfolio() {
         <div className="masonry">
           {items.map(item => (
             <div key={item.id} className="masonry-item">
-              <div className="rounded-2xl overflow-hidden card-hover cursor-pointer group"
-                style={{ background: "#F7F3EE" }}>
+              <a href={item.link} target="_blank" rel="noopener noreferrer"
+                className="rounded-2xl overflow-hidden card-hover cursor-pointer group block"
+                style={{ background: "#F7F3EE", textDecoration: "none" }}>
                 <div className="relative overflow-hidden" style={{ height: item.height, background: "#E8E0D5" }}>
                   <img
-                    src={`https://images.unsplash.com/${item.img}?w=600&h=400&fit=crop&auto=format`}
+                    src={item.img.startsWith("http") || item.img.startsWith("/")
+                      ? item.img
+                      : `https://images.unsplash.com/${item.img}?w=600&h=400&fit=crop&auto=format`}
                     alt={item.title}
                     className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
                     loading="lazy"
@@ -811,7 +815,7 @@ function Portfolio() {
                   <span className="text-xs font-semibold" style={{ color: "#8EC5FC" }}>{item.tag}</span>
                   <h4 className="font-semibold mt-1" style={{ color: "#3F4A5A" }}>{item.title}</h4>
                 </div>
-              </div>
+              </a>
             </div>
           ))}
         </div>
@@ -1019,11 +1023,11 @@ function Garden() {
 // ─── CONTACT ───────────────────────────────────────────────────────────────
 
 const SOCIALS = [
-  { Icon: Mail, label: "Email", value: "siti@alfath.id", color: "#8EC5FC" },
-  { Icon: Github, label: "GitHub", value: "github.com/sitialfath", color: "#3F4A5A" },
-  { Icon: Linkedin, label: "LinkedIn", value: "linkedin.com/in/sitialfath", color: "#0077B5" },
-  { Icon: Youtube, label: "YouTube", value: "youtube.com/@sitialfath", color: "#F7A8C4" },
-  { Icon: Facebook, label: "Facebook", value: "facebook.com/sitialfath", color: "#A9D18E" },
+  { Icon: Mail, label: "Email", value: "nunkalfath@gmail.com", color: "#8EC5FC" },
+  { Icon: Github, label: "GitHub", value: "github.com/nunkalfath", color: "#3F4A5A" },
+  { Icon: Linkedin, label: "LinkedIn", value: "linkedin.com/in/nunkalfath", color: "#0077B5" },
+  { Icon: Youtube, label: "YouTube", value: "youtube.com/@sitinuralfath", color: "#F7A8C4" },
+  { Icon: Facebook, label: "Facebook", value: "facebook.com/sitinuralfath", color: "#A9D18E" },
 ];
 
 function Contact() {
@@ -1086,7 +1090,7 @@ function Contact() {
                 </h4>
                 {[
                   { key: "name", label: "Your Name", type: "text", ph: "Siti Nur Alfath" },
-                  { key: "email", label: "Email Address", type: "email", ph: "hello@example.com" },
+                  { key: "email", label: "Email Address", type: "email", ph: "nunkalfath@gmail.com" },
                 ].map(f => (
                   <div key={f.key}>
                     <label className="block text-sm font-semibold mb-1.5" style={{ color: "#3F4A5A" }}>{f.label}</label>
