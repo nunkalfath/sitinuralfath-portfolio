@@ -6,6 +6,7 @@ import {
   ArrowUp, Calendar, Clock, Heart, Star,
   GraduationCap, Briefcase, Users, Home, Cpu,
 } from "lucide-react";
+import ResumeCraftLandingPage from "./components/ResumeCraft";
 
 // ─── DATA ──────────────────────────────────────────────────────────────────
 
@@ -31,7 +32,7 @@ const TIMELINE = [
 ];
 
 const PORTFOLIO_ITEMS = [
-  { id: 1, title: "ResumeCraft", category: "Design", tag: "UI", img: "/resumecraft.png", height: 200, link: "https://www.figma.com/proto/pTIN8uDQBOBooW3WHrsC6X/My-Resume-Portofolio?node-id=314-445&t=rP10JuV0Zpns6xYO-1" },
+  { id: 1, title: "ResumeCraft", category: "Design", tag: "UI", img: "/resumecraft.png", height: 200, link: "#resumecraft" },
   { id: 2, title: "Pre-Order Ecommerce Management System", category: "Front-End Developer", tag: "Website", img: "photo-1551288049-bebda4e38f71", height: 260, link: "https://github.com/nunkalfath/pre-order-ecommerce" },
   { id: 3, title: "Ganin Homestead", category: "Landing Page", tag: "Landing Page", img: "photo-1503389152951-9c3d8b6d9538", height: 220, link: "https://github.com" },
   { id: 4, title: "Physics Learning App", category: "Mobile App", tag: "Mobile App", img: "photo-1635070041078-e363dbe005cb", height: 280, link: "https://github.com" },
@@ -672,7 +673,7 @@ const BUILD_CARDS = [
   { Icon: Palette, title: "UI/UX Design", desc: "Crafting intuitive, beautiful digital experiences — from wireframes to pixel-perfect interfaces.", color: "#8EC5FC", bg: "#EEF7FF", tags: ["Figma", "Design Systems", "Prototyping"] },
   { Icon: Code, title: "Front-end Development", desc: "Bringing designs to life with clean React code, semantic HTML, and thoughtful CSS.", color: "#A9D18E", bg: "#F0F8EB", tags: ["React", "TypeScript", "Tailwind"] },
   { Icon: BookOpen, title: "Physics Education", desc: "Teaching physics through stories, illustrations, and real-world examples that actually stick.", color: "#F7A8C4", bg: "#FFF0F5", tags: ["Grade 10–12", "Tutoring", "Content"] },
-  { Icon: Sprout, title: "Gardening", desc: "Growing vegetables, composting, and exploring the homestead lifestyle one season at a time.", color: "#A47C5B", bg: "#F5EDE5", tags: ["Hydroponics", "Composting", "Harvest"] },
+  { Icon: Sprout, title: "Gardening", desc: "Growing vegetables, composting, and exploring the homestead lifestyle one season at a time.", color: "#A47C5B", bg: "#F5EDE5", tags: ["Organics", "Composting", "Harvest"] },
 ];
 
 function WhatImBuilding() {
@@ -790,7 +791,9 @@ function Portfolio() {
         <div className="masonry">
           {items.map(item => (
             <div key={item.id} className="masonry-item">
-              <a href={item.link} target="_blank" rel="noopener noreferrer"
+              <a href={item.link}
+                target={item.link.startsWith("#") ? "_self" : "_blank"}
+                rel={item.link.startsWith("#") ? "" : "noopener noreferrer"}
                 className="rounded-2xl overflow-hidden card-hover cursor-pointer group block"
                 style={{ background: "#F7F3EE", textDecoration: "none" }}>
                 <div className="relative overflow-hidden" style={{ height: item.height, background: "#E8E0D5" }}>
@@ -807,7 +810,11 @@ function Portfolio() {
                   <div className="absolute top-3 right-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                     <div className="w-8 h-8 rounded-full flex items-center justify-center"
                       style={{ background: "rgba(255,255,255,0.9)" }}>
-                      <ExternalLink size={13} style={{ color: "#3F4A5A" }} />
+                      {item.link.startsWith("#") ? (
+                        <span className="text-sm font-bold" style={{ color: "#3F4A5A", lineHeight: 1 }}>→</span>
+                      ) : (
+                        <ExternalLink size={13} style={{ color: "#3F4A5A" }} />
+                      )}
                     </div>
                   </div>
                 </div>
@@ -962,7 +969,7 @@ function Blog() {
 
 // ─── GARDEN ────────────────────────────────────────────────────────────────
 
-const GARDEN_CATS = ["All", "Vegetables", "Flowers", "Homestead", "Harvest", "DIY", "Composting", "Hydroponics", "Recipe"];
+const GARDEN_CATS = ["All", "Vegetables", "Flowers", "Homestead", "Harvest", "DIY", "Composting", "Organics", "Recipe"];
 
 function Garden() {
   const [cat, setCat] = useState("All");
@@ -1239,7 +1246,24 @@ export default function App() {
   const [dark, setDark] = useState(false);
   const [active, setActive] = useState("home");
 
+  const isResumeCraftHash = (hash: string) => {
+    return hash === "#resumecraft" || hash === "#/resumecraft";
+  };
+
+  const [view, setView] = useState<"main" | "resumecraft">(() => {
+    return isResumeCraftHash(window.location.hash) ? "resumecraft" : "main";
+  });
+
   useEffect(() => {
+    const handleHash = () => {
+      setView(isResumeCraftHash(window.location.hash) ? "resumecraft" : "main");
+    };
+    window.addEventListener("hashchange", handleHash);
+    return () => window.removeEventListener("hashchange", handleHash);
+  }, []);
+
+  useEffect(() => {
+    if (view === "resumecraft") return; // Skip observer when on landing page
     const ids = ["home", "about", "portfolio", "physics", "blog", "garden", "contact"];
     const obs = new IntersectionObserver(
       entries => entries.forEach(e => { if (e.isIntersecting) setActive(e.target.id); }),
@@ -1247,29 +1271,61 @@ export default function App() {
     );
     ids.forEach(id => { const el = document.getElementById(id); if (el) obs.observe(el); });
     return () => obs.disconnect();
-  }, []);
+  }, [view]);
+
+  useEffect(() => {
+    if (view === "main") {
+      const hash = window.location.hash;
+      if (hash) {
+        const id = hash.replace("#", "").replace("/", "");
+        if (id) {
+          setTimeout(() => {
+            const el = document.getElementById(id);
+            if (el) el.scrollIntoView({ behavior: "smooth" });
+          }, 150);
+        }
+      }
+    }
+  }, [view]);
 
   const scrollTo = (id: string) => {
-    document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
+    if (view !== "main") {
+      setView("main");
+      window.location.hash = id;
+    } else {
+      document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
+    }
   };
 
   return (
     <div className={dark ? "dark" : ""}>
       <style>{GLOBAL_CSS}</style>
       <div style={{ fontFamily: "'Poppins', sans-serif" }}>
-        <NavBar dark={dark} setDark={setDark} active={active} onNav={scrollTo} />
-        <main>
-          <Hero onNav={scrollTo} />
-          <WhatImBuilding />
-          <About />
-          <Portfolio />
-          <PhysicsHub />
-          <Blog />
-          <Garden />
-          <Contact />
-        </main>
-        <Footer onNav={scrollTo} />
-        <BackToTop />
+        {view === "resumecraft" ? (
+          <ResumeCraftLandingPage
+            onBack={() => {
+              setView("main");
+              window.location.hash = "portfolio";
+            }}
+            dark={dark}
+          />
+        ) : (
+          <>
+            <NavBar dark={dark} setDark={setDark} active={active} onNav={scrollTo} />
+            <main>
+              <Hero onNav={scrollTo} />
+              <WhatImBuilding />
+              <About />
+              <Portfolio />
+              <PhysicsHub />
+              <Blog />
+              <Garden />
+              <Contact />
+            </main>
+            <Footer onNav={scrollTo} />
+            <BackToTop />
+          </>
+        )}
       </div>
     </div>
   );
