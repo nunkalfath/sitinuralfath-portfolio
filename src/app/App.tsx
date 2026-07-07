@@ -7,6 +7,9 @@ import {
   GraduationCap, Briefcase, Users, Home, Cpu,
 } from "lucide-react";
 import ResumeCraftLandingPage from "./components/ResumeCraft";
+import BlogPostDetail from "./components/BlogPostDetail";
+import GardenPostDetail from "./components/GardenPostDetail";
+import { BLOG_POSTS, GARDEN_POSTS } from "./data/postsData";
 
 // ─── DATA ──────────────────────────────────────────────────────────────────
 
@@ -34,7 +37,7 @@ const TIMELINE = [
 const PORTFOLIO_ITEMS = [
   { id: 1, title: "ResumeCraft", category: "Design", tag: "UI", img: "/resumecraft.png", height: 200, link: "#resumecraft" },
   { id: 2, title: "Pre-Order Ecommerce Management System", category: "Front-End Developer", tag: "Website", img: "photo-1551288049-bebda4e38f71", height: 260, link: "https://github.com/nunkalfath/pre-order-ecommerce" },
-  { id: 3, title: "Ganin Homestead", category: "Landing Page", tag: "Landing Page", img: "photo-1503389152951-9c3d8b6d9538", height: 220, link: "https://github.com" },
+  { id: 3, title: "Ganin Homestead", category: "Content Creator", tag: "Youtube", img: "photo-1503389152951-9c3d8b6d9538", height: 220, link: "https://www.youtube.com/@GaninHomestead/shorts" },
   { id: 4, title: "Physics Learning App", category: "Mobile App", tag: "Mobile App", img: "photo-1635070041078-e363dbe005cb", height: 280, link: "https://github.com" },
   { id: 5, title: "Portfolio Website", category: "Website Design", tag: "Website", img: "photo-1499750310107-5fef28a66643", height: 230, link: "https://sitinuralfath-portfolio.vercel.app/" },
   { id: 6, title: "Blogger Theme", category: "Blogger Theme", tag: "Theme", img: "photo-1542435503-ec7b0b197446", height: 250, link: "https://github.com" },
@@ -71,23 +74,7 @@ const PHYSICS_TOPICS: Record<string, PhysicsTopic[]> = {
   ],
 };
 
-const BLOG_POSTS = [
-  { id: 1, title: "How I Returned to Tech After 5 Years Away", category: "Career Journey", date: "Dec 15, 2024", readTime: "8 min", img: "photo-1499750310107-5fef28a66643" },
-  { id: 2, title: "My Figma to React Workflow (With Real Examples)", category: "Frontend", date: "Dec 8, 2024", readTime: "12 min", img: "photo-1542435503-ec7b0b197446" },
-  { id: 3, title: "Teaching Physics Through Storytelling", category: "Learning Notes", date: "Nov 28, 2024", readTime: "6 min", img: "photo-1635070041078-e363dbe005cb" },
-  { id: 4, title: "Building a Design System from Scratch as a Solo Dev", category: "UI UX", date: "Nov 20, 2024", readTime: "10 min", img: "photo-1561070791-2526d30994b5" },
-  { id: 5, title: "What AI Tools Actually Help Me as a Creator", category: "AI", date: "Nov 10, 2024", readTime: "7 min", img: "photo-1518770660439-4636190af475" },
-  { id: 6, title: "On Productivity as a Mother Who Codes", category: "Productivity", date: "Oct 30, 2024", readTime: "5 min", img: "photo-1586717791821-3f44a563fa4c" },
-];
-
-const GARDEN_POSTS = [
-  { id: 1, title: "Growing Tomatoes Vertically in a Small Space", category: "Vegetables", img: "photo-1464226184884-fa280b87c399" },
-  { id: 2, title: "My Composting Journey — Month 3 Update", category: "Composting", img: "photo-1416879595882-3373a0480b5b" },
-  { id: 3, title: "Hydroponic Basil: Setup & First Harvest", category: "Hydroponics", img: "photo-1585320806297-9794b3e4eeae" },
-  { id: 4, title: "October Harvest Season Log", category: "Harvest", img: "photo-1506905925346-21bda4d32df4" },
-  { id: 5, title: "DIY Raised Bed Garden on a Budget", category: "DIY", img: "photo-1524492412937-b28074a5d7da" },
-  { id: 6, title: "Simple Recipes from Our Garden Harvest", category: "Recipe", img: "photo-1490885578174-acda8905c2c6" },
-];
+// BLOG_POSTS and GARDEN_POSTS are imported from ./data/postsData
 
 // ─── GLOBAL STYLES ─────────────────────────────────────────────────────────
 
@@ -935,7 +922,9 @@ function Blog() {
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {posts.map(post => (
-            <div key={post.id} className="rounded-2xl overflow-hidden card-hover cursor-pointer group"
+            <div key={post.id} 
+              onClick={() => { window.location.hash = `#/blog/${post.id}`; }}
+              className="rounded-2xl overflow-hidden card-hover cursor-pointer group"
               style={{ background: "#FFF8EF" }}>
               <div className="relative overflow-hidden" style={{ height: 200, background: "#E8E0D5" }}>
                 <img
@@ -996,7 +985,9 @@ function Garden() {
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {posts.map(post => (
-            <div key={post.id} className="rounded-2xl overflow-hidden card-hover cursor-pointer group"
+            <div key={post.id} 
+              onClick={() => { window.location.hash = `#/garden/${post.id}`; }}
+              className="rounded-2xl overflow-hidden card-hover cursor-pointer group"
               style={{ background: "white" }}>
               <div className="relative overflow-hidden" style={{ height: 210, background: "#C5E2B2" }}>
                 <img
@@ -1060,22 +1051,31 @@ function Contact() {
               "Every connection is a new seed planted."
             </p>
             <div className="space-y-3">
-              {SOCIALS.map((s, i) => (
-                <div key={i}
-                  className="flex items-center gap-4 p-4 rounded-2xl cursor-pointer group transition-shadow hover:shadow-md"
-                  style={{ background: "#FFF8EF" }}>
-                  <div className="w-10 h-10 rounded-xl flex items-center justify-center"
-                    style={{ background: s.color }}>
-                    <s.Icon size={17} color="white" />
-                  </div>
-                  <div className="flex-1">
-                    <div className="text-xs font-medium" style={{ color: "#8A8FA8" }}>{s.label}</div>
-                    <div className="text-sm font-semibold group-hover:text-[#8EC5FC] transition-colors"
-                      style={{ color: "#3F4A5A" }}>{s.value}</div>
-                  </div>
-                  <ExternalLink size={13} style={{ color: "#C5C9D6" }} />
-                </div>
-              ))}
+              {SOCIALS.map((s, i) => {
+                const isMail = s.label === "Email";
+                const href = isMail
+                  ? (s.value.startsWith("mailto:") ? s.value : `mailto:${s.value}`)
+                  : (s.value.startsWith("http://") || s.value.startsWith("https://") ? s.value : `https://${s.value}`);
+                return (
+                  <a key={i}
+                    href={href}
+                    target={isMail ? undefined : "_blank"}
+                    rel="noreferrer"
+                    className="flex items-center gap-4 p-4 rounded-2xl cursor-pointer group transition-shadow hover:shadow-md block no-underline"
+                    style={{ background: "#FFF8EF", textDecoration: "none" }}>
+                    <div className="w-10 h-10 rounded-xl flex items-center justify-center"
+                      style={{ background: s.color }}>
+                      <s.Icon size={17} color="white" />
+                    </div>
+                    <div className="flex-1">
+                      <div className="text-xs font-medium" style={{ color: "#8A8FA8" }}>{s.label}</div>
+                      <div className="text-sm font-semibold group-hover:text-[#8EC5FC] transition-colors"
+                        style={{ color: "#3F4A5A" }}>{s.value}</div>
+                    </div>
+                    <ExternalLink size={13} style={{ color: "#C5C9D6" }} />
+                  </a>
+                );
+              })}
             </div>
           </div>
 
@@ -1246,24 +1246,40 @@ export default function App() {
   const [dark, setDark] = useState(false);
   const [active, setActive] = useState("home");
 
-  const isResumeCraftHash = (hash: string) => {
-    return hash === "#resumecraft" || hash === "#/resumecraft";
+  const parseHash = (hash: string) => {
+    if (hash === "#resumecraft" || hash === "#/resumecraft") {
+      return { view: "resumecraft" as const, id: null };
+    }
+    if (hash.startsWith("#/blog/")) {
+      const id = parseInt(hash.replace("#/blog/", ""), 10);
+      if (!isNaN(id)) return { view: "blog-post" as const, id };
+    }
+    if (hash.startsWith("#/garden/")) {
+      const id = parseInt(hash.replace("#/garden/", ""), 10);
+      if (!isNaN(id)) return { view: "garden-post" as const, id };
+    }
+    return { view: "main" as const, id: null };
   };
 
-  const [view, setView] = useState<"main" | "resumecraft">(() => {
-    return isResumeCraftHash(window.location.hash) ? "resumecraft" : "main";
+  const [view, setView] = useState<"main" | "resumecraft" | "blog-post" | "garden-post">(() => {
+    return parseHash(window.location.hash).view;
+  });
+  const [activePostId, setActivePostId] = useState<number | null>(() => {
+    return parseHash(window.location.hash).id;
   });
 
   useEffect(() => {
     const handleHash = () => {
-      setView(isResumeCraftHash(window.location.hash) ? "resumecraft" : "main");
+      const parsed = parseHash(window.location.hash);
+      setView(parsed.view);
+      setActivePostId(parsed.id);
     };
     window.addEventListener("hashchange", handleHash);
     return () => window.removeEventListener("hashchange", handleHash);
   }, []);
 
   useEffect(() => {
-    if (view === "resumecraft") return; // Skip observer when on landing page
+    if (view !== "main") return; // Skip observer when not on main page
     const ids = ["home", "about", "portfolio", "physics", "blog", "garden", "contact"];
     const obs = new IntersectionObserver(
       entries => entries.forEach(e => { if (e.isIntersecting) setActive(e.target.id); }),
@@ -1277,7 +1293,7 @@ export default function App() {
     if (view === "main") {
       const hash = window.location.hash;
       if (hash) {
-        const id = hash.replace("#", "").replace("/", "");
+        const id = hash.replace("#", "").replace(/^\//, "").split("/")[0];
         if (id) {
           setTimeout(() => {
             const el = document.getElementById(id);
@@ -1290,7 +1306,6 @@ export default function App() {
 
   const scrollTo = (id: string) => {
     if (view !== "main") {
-      setView("main");
       window.location.hash = id;
     } else {
       document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
@@ -1304,11 +1319,42 @@ export default function App() {
         {view === "resumecraft" ? (
           <ResumeCraftLandingPage
             onBack={() => {
-              setView("main");
               window.location.hash = "portfolio";
             }}
             dark={dark}
           />
+        ) : view === "blog-post" && activePostId !== null ? (
+          <>
+            <NavBar dark={dark} setDark={setDark} active="blog" onNav={scrollTo} />
+            <BlogPostDetail
+              postId={activePostId}
+              onBack={() => {
+                window.location.hash = "blog";
+              }}
+              onNavigatePost={(id) => {
+                window.location.hash = `#/blog/${id}`;
+              }}
+              dark={dark}
+            />
+            <Footer onNav={scrollTo} />
+            <BackToTop />
+          </>
+        ) : view === "garden-post" && activePostId !== null ? (
+          <>
+            <NavBar dark={dark} setDark={setDark} active="garden" onNav={scrollTo} />
+            <GardenPostDetail
+              postId={activePostId}
+              onBack={() => {
+                window.location.hash = "garden";
+              }}
+              onNavigatePost={(id) => {
+                window.location.hash = `#/garden/${id}`;
+              }}
+              dark={dark}
+            />
+            <Footer onNav={scrollTo} />
+            <BackToTop />
+          </>
         ) : (
           <>
             <NavBar dark={dark} setDark={setDark} active={active} onNav={scrollTo} />
