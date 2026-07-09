@@ -1030,13 +1030,50 @@ const SOCIALS = [
 
 function Contact() {
   const [form, setForm] = useState({ name: "", email: "", message: "" });
-  const [sent, setSent] = useState(false);
+  const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
+  const [errorMessage, setErrorMessage] = useState("");
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setSent(true);
-    setTimeout(() => setSent(false), 4000);
-    setForm({ name: "", email: "", message: "" });
+    setStatus("loading");
+    setErrorMessage("");
+
+    const accessKey = import.meta.env.VITE_WEB3FORMS_ACCESS_KEY;
+    if (!accessKey || accessKey === "YOUR_ACCESS_KEY_HERE" || accessKey.trim() === "") {
+      setStatus("error");
+      setErrorMessage("Access key Web3Forms belum diatur. Silakan tambahkan VITE_WEB3FORMS_ACCESS_KEY di file .env Anda.");
+      return;
+    }
+
+    try {
+      const response = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+        body: JSON.stringify({
+          access_key: accessKey,
+          name: form.name,
+          email: form.email,
+          message: form.message,
+          from_name: "Portfolio Contact Form",
+          subject: `New Message from ${form.name}`,
+        }),
+      });
+
+      const data = await response.json();
+      if (data.success) {
+        setStatus("success");
+        setForm({ name: "", email: "", message: "" });
+      } else {
+        setStatus("error");
+        setErrorMessage(data.message || "Terjadi kesalahan saat mengirim pesan. Silakan coba lagi.");
+      }
+    } catch (error) {
+      setStatus("error");
+      setErrorMessage("Terjadi kesalahan jaringan. Silakan periksa koneksi internet Anda.");
+    }
   };
 
   return (
@@ -1080,21 +1117,33 @@ function Contact() {
           </div>
 
           <div className="rounded-3xl p-8" style={{ background: "#FFF8EF" }}>
-            {sent ? (
+            {status === "success" ? (
               <div className="text-center py-12">
                 <div className="text-5xl mb-4">🌸</div>
                 <h4 className="text-xl font-bold mb-2" style={{ fontFamily: "'Playfair Display', serif", color: "#3F4A5A" }}>
                   Message Sent!
                 </h4>
-                <p className="text-sm" style={{ color: "#5A6478" }}>
+                <p className="text-sm mb-6" style={{ color: "#5A6478" }}>
                   Thank you for reaching out. I'll get back to you soon!
                 </p>
+                <button
+                  onClick={() => setStatus("idle")}
+                  className="btn-secondary text-xs py-2 px-6"
+                >
+                  Send Another Message
+                </button>
               </div>
             ) : (
               <form onSubmit={handleSubmit} className="space-y-4">
                 <h4 className="text-xl font-bold mb-5" style={{ fontFamily: "'Playfair Display', serif", color: "#3F4A5A" }}>
                   Send a Message
                 </h4>
+                {status === "error" && (
+                  <div className="p-4 mb-4 text-xs rounded-xl border animate-pulse" style={{ background: "#FFF0F2", borderColor: "#F7A8C4", color: "#A47C5B" }}>
+                    <p className="font-bold mb-1">Pengiriman Gagal:</p>
+                    <p>{errorMessage}</p>
+                  </div>
+                )}
                 {[
                   { key: "name", label: "Your Name", type: "text", ph: "Siti Nur Alfath" },
                   { key: "email", label: "Email Address", type: "email", ph: "nunkalfath@gmail.com" },
@@ -1102,6 +1151,7 @@ function Contact() {
                   <div key={f.key}>
                     <label className="block text-sm font-semibold mb-1.5" style={{ color: "#3F4A5A" }}>{f.label}</label>
                     <input type={f.type} required
+                      disabled={status === "loading"}
                       value={form[f.key as keyof typeof form]}
                       onChange={e => setForm(prev => ({ ...prev, [f.key]: e.target.value }))}
                       placeholder={f.ph}
@@ -1115,6 +1165,7 @@ function Contact() {
                 <div>
                   <label className="block text-sm font-semibold mb-1.5" style={{ color: "#3F4A5A" }}>Message</label>
                   <textarea required rows={5}
+                    disabled={status === "loading"}
                     value={form.message}
                     onChange={e => setForm(prev => ({ ...prev, message: e.target.value }))}
                     placeholder="I'd love to collaborate on..."
@@ -1124,8 +1175,8 @@ function Contact() {
                     onBlur={e => (e.target.style.borderColor = "rgba(142,197,252,0.35)")}
                   />
                 </div>
-                <button type="submit" className="btn-primary w-full justify-center">
-                  Send Message 🌸
+                <button type="submit" disabled={status === "loading"} className="btn-primary w-full justify-center disabled:opacity-50 disabled:cursor-not-allowed">
+                  {status === "loading" ? "Sending... 🌸" : "Send Message 🌸"}
                 </button>
               </form>
             )}
